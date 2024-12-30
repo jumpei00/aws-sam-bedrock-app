@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "aws-sam-bedrock-app"
+version = "0.1.0"
+description = ""
+authors = ["Jumpei Motohashi <61613314+jumpei00@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
