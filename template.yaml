@@ -26,7 +26,7 @@ Resources:
       FunctionName: Hello World Function
       CodeUri: functions/hello/
       Handler: app.lambda_handler
-      Runtime: python3.13
+      Runtime: python3.11
 
 Outputs:
   APIGateway:
