@@ -10,3 +10,5 @@ generate-types:
 	poetry run python scripts/generate_types.py
 test:
 	poetry run pytest tests/unit
+validate:
+    sam validate
