@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+  title: AWS Sam Bedrock API
+  version: 1.0.0
+paths:
+  /hello:
+    get:
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hello"
+      x-amazon-apigateway-integration:
+        Fn::Sub: arn:aws:apigateway:${AWS:Region}:lambda:path/2015-03-31/functions/${HelloFn.Arn}/invocations
+        httpMethod: POST
+        passthroughBehavior: when_no_match
+        type: aws_proxy
+components:
+  schemas:
+    Hello:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
