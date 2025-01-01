@@ -23,7 +23,7 @@ Resources:
   HelloFn:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: Hello World Function
+      FunctionName: HelloWorldFunction
       CodeUri: functions/hello/
       Handler: app.lambda_handler
       Runtime: python3.11
@@ -31,7 +31,7 @@ Resources:
 Outputs:
   APIGateway:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${APIGateway}.execute-api.${AWS::Region}.amazonaws.com/Prod/aws-sam-bedrock-app/"
+    Value: !Sub "https://${APIGateway}.execute-api.${AWS::Region}.amazonaws.com/Demo/aws-sam-bedrock-app/"
   HelloFn:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt HelloFn.Arn
