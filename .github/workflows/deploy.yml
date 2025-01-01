@@ -29,4 +29,4 @@ jobs:
       - name: Build And Deploy
         run: |
           sam build
-          sam deploy --stack-name sam-bedrock-app --capabilities CAPABILITY_IAM
+          sam deploy --stack-name sam-bedrock-app --no-confirm-changeset --no-fail-on-empty-changeset
