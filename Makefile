@@ -11,4 +11,4 @@ generate-types:
 test:
 	poetry run pytest tests/unit
 validate:
-    sam validate
+	sam validate
