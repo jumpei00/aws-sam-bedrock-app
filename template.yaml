@@ -32,7 +32,7 @@ Resources:
   HelloFn:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: hello-worlf-function
+      FunctionName: hello-world-function
       CodeUri: functions/hello/
       Handler: app.lambda_handler
       Runtime: python3.11

@@ -16,6 +16,10 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
+pre_build_commands = [
+    "mkdir -p .aws-sam/build/python",
+    "cp -r shared/ .aws-sam/build/python/"
+]
 
 [default.package.parameters]
 resolve_s3 = true
