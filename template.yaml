@@ -20,10 +20,19 @@ Resources:
           Name: AWS::Include
           Parameters:
             Location: openapi/schema.yaml
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: shared-layer
+      Description: Shared modules layer
+      ContentUri: shared/
+      CompatibleRuntimes:
+        - python3.11
+      RetentionPolicy: Retain
   HelloFn:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: HelloWorldFunction
+      FunctionName: hello-worlf-function
       CodeUri: functions/hello/
       Handler: app.lambda_handler
       Runtime: python3.11
