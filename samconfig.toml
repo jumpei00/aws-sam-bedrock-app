@@ -17,8 +17,9 @@ capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
 pre_build_commands = [
-    "mkdir -p .aws-sam/build/python",
-    "cp -r shared/ .aws-sam/build/python/"
+    "rm -rf .aws-sam/build/python",
+    "mkdir -p .aws-sam/build/SharedLayer/python",
+    "cp -r shared/* .aws-sam/build/SharedLayer/python/"
 ]
 
 [default.package.parameters]
