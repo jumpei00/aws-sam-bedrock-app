@@ -2,16 +2,18 @@ add:
 	poetry add $(package)
 dev-add:
 	poetry add $(package) --dev
+update:
+	poetry update $(package)
+delete:
+	poetry remove $(package)
 install:
 	poetry install
 shell:
 	poetry shell
-generate-types:
-	poetry run python scripts/generate_types.py
 test:
 	poetry run pytest tests/unit
 validate:
 	sam validate
 generate-layer:
 	cp -r shared layer/python/
-	pip install -r layer/requirements.txt -t layer/python/
+	pip install -r layer/python/shared/requirements.txt -t layer/python/

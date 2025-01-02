@@ -30,4 +30,4 @@ jobs:
         run: |
           make generate-layer
           sam build
-          sam deploy --stack-name sam-bedrock-app --no-confirm-changeset --no-fail-on-empty-changeset
+          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
