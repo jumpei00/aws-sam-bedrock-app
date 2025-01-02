@@ -13,5 +13,5 @@ test:
 validate:
 	sam validate
 generate-layer:
-	cp -r shared/* layer/python/shared/
+	cp -r shared layer/python/
 	pip install -r layer/requirements.txt -t layer/python/
