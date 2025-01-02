@@ -8,26 +8,13 @@ Globals:
   Function:
     Architectures:
       - x86_64
+    Handler: app.lambda_handler
+    Runtime: python3.11
+    Layers:
+      - !Ref SharedLayer
     Timeout: 3
 
 Resources:
-  ApiGatewayCloudWatchRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: apigateway.amazonaws.com
-            Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
-  ApiGatewayAccount:
-    Type: AWS::ApiGateway::Account
-    Properties:
-      CloudWatchRoleArn: !GetAtt ApiGatewayCloudWatchRole.Arn
-    DependsOn: ApiGatewayCloudWatchRole
   APIGateway:
     Type: AWS::Serverless::Api
     Properties:
@@ -37,19 +24,6 @@ Resources:
           Name: AWS::Include
           Parameters:
             Location: openapi/schema.yaml
-      AccessLogSetting:
-        DestinationArn: !GetAtt APIGatewayAccessLogGroup.Arn
-        Format: '{ "requestId":"$context.requestId", "ip": "$context.identity.sourceIp", "caller":"$context.identity.caller", "user":"$context.identity.user", "requestTime":"$context.requestTime", "httpMethod":"$context.httpMethod", "resourcePath":"$context.resourcePath", "status":"$context.status", "protocol":"$context.protocol", "responseLength":"$context.responseLength" }'
-      MethodSettings:
-        - LoggingLevel: INFO
-          ResourcePath: "/*"
-          HttpMethod: "*"
-    DependsOn: ApiGatewayAccount
-  APIGatewayAccessLogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub "/aws/apigateway/${AWS::StackName}"
-      RetentionInDays: 7
   SharedLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
@@ -64,17 +38,13 @@ Resources:
     Properties:
       FunctionName: hello-world-function
       CodeUri: functions/hello/
-      Handler: app.lambda_handler
-      Runtime: python3.11
-      Layers:
-        - !Ref SharedLayer
-  HelloFnPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName: !Ref HelloFn
-      Action: lambda:InvokeFunction
-      Principal: apigateway.amazonaws.com
-      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${APIGateway}/*/GET/hello"
+      Events:
+        HelloApi:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+            RestApiId: !Ref APIGateway
 
 Outputs:
   APIGateway:
