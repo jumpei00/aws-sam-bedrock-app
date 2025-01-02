@@ -19,11 +19,6 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Demo
-      DefinitionBody:
-        Fn::Transform:
-          Name: AWS::Include
-          Parameters:
-            Location: openapi/schema.yaml
   SharedLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
