@@ -28,5 +28,6 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Build And Deploy
         run: |
+          make generate-layer
           sam build
           sam deploy --stack-name sam-bedrock-app --no-confirm-changeset --no-fail-on-empty-changeset

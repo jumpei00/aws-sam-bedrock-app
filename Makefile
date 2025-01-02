@@ -12,3 +12,6 @@ test:
 	poetry run pytest tests/unit
 validate:
 	sam validate
+generate-layer:
+	mkdir -p layer/python/shared/
+	cp -r shared/* layer/python/shared/

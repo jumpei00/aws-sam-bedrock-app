@@ -25,7 +25,7 @@ Resources:
     Properties:
       LayerName: shared-layer
       Description: Shared modules layer
-      ContentUri: shared/
+      ContentUri: layer/
       CompatibleRuntimes:
         - python3.11
       RetentionPolicy: Retain
