@@ -1,14 +1,19 @@
-import json
-
 import pytest
 
-from functions.hello import app
+
+@pytest.fixture
+def lambda_context():
+    class MockContext:
+        def __init__(self):
+            self.function_name = "test-func"
+            self.function_version = "$LATEST"
+            self.memory_limit_in_mb = 128
+
+    return MockContext()
 
 
-@pytest.fixture()
+@pytest.fixture
 def apigw_event():
-    """ Generates API GW Event"""
-
     return {
         "body": '{ "test": "body"}',
         "resource": "/{proxy+}",
@@ -60,13 +65,3 @@ def apigw_event():
         "stageVariables": {"baz": "qux"},
         "path": "/examplepath",
     }
-
-
-def test_lambda_handler(apigw_event):
-
-    ret = app.lambda_handler(apigw_event, "")
-    data = json.loads(ret["body"])
-
-    assert ret["statusCode"] == 200
-    assert "message" in ret["body"]
-    assert data["message"] == "hello world"
