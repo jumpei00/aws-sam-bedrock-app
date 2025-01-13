@@ -6,4 +6,4 @@ class TestHelloIntegration:
         response = requests.get(api_gateway_url + "/hello")
 
         assert response.status_code == 200
-        assert response.json() == {"message": "hello world"}
+        assert response.json() == {"message": "Hello, World!!"}

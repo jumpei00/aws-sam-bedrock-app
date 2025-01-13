@@ -28,6 +28,9 @@ Resources:
       CompatibleRuntimes:
         - python3.11
       RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: python3.11
+      BuildArchitecture: x86_64
   HelloFn:
     Type: AWS::Serverless::Function
     Properties:

@@ -15,5 +15,7 @@ test:
 validate:
 	sam validate
 generate-layer:
-	cp -r shared layer/python/
-	pip install -r layer/python/shared/requirements.txt -t layer/python/
+	cp -r shared layer/
+	mv layer/shared/requirements.txt layer/
+start-api:
+	sam local start-api --port=3000
